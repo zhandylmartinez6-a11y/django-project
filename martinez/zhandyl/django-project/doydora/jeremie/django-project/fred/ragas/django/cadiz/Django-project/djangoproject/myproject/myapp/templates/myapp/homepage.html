@@ -1,0 +1,206 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Latest Posts</h1>
+            <p>Discover insights, ideas, and stories shared by our community</p>
+        </div>
+    </div>
+
+    <div class="posts-container">
+        {% for post in posts %}
+        <div class="post-card">
+
+            <div class="post-header">
+                <div class="author">
+                    <div class="avatar">
+                        {{ post.userId|stringformat:"s"|slice:":1" }}
+                    </div>
+                    <div>
+                        <div class="author-name">Author {{ post.userId }}</div>
+                        <div class="post-date">Just now</div>
+                    </div>
+                </div>
+                <span class="post-id">#{{ post.id }}</span>
+            </div>
+
+            <h2 class="post-title">{{ post.title|capfirst }}</h2>
+
+            <p class="post-body">
+                {{ post.body|truncatewords:30 }}
+            </p>
+
+            <div class="post-footer">
+                <div class="actions">
+                    <button class="btn like-btn">❤️ Like</button>
+                    <button class="btn comment-btn">💬 Comment</button>
+                </div>
+                <a href="#" class="read-more">Read More →</a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+/* Page Background */
+body {
+    background: linear-gradient(135deg, #eef2f7, #dbe4f7);
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px 60px;
+    border-bottom-left-radius: 50% 10%;
+    border-bottom-right-radius: 50% 10%;
+}
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.hero-section p {
+    font-size: 1.2rem;
+    color: #f0f0f0;
+}
+
+/* Posts Container */
+.posts-container {
+    max-width: 900px;
+    margin: -40px auto 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Post Card */
+.post-card {
+    background: linear-gradient(145deg, #ffffff, #f7f9fc);
+    border-radius: 20px;
+    padding: 25px 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+/* Header */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.author-name {
+    font-weight: 600;
+    color: #0f0f0f;
+}
+.post-date {
+    font-size: 0.8rem;
+    color: #fffdfd;
+}
+.post-id {
+    font-size: 0.8rem;
+    color: #f3eaea;
+}
+
+/* Title & Body */
+.post-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+    margin: 10px 0 12px;
+}
+.post-body {
+    color: #241d1d;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Footer & Buttons */
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.like-btn {
+    background: #fcfafa;
+    color: rgb(202, 104, 241);
+}
+.comment-btn {
+    background: #1e90ff;
+    color: white;
+}
+.btn:hover {
+    opacity: 0.85;
+}
+.read-more {
+    text-decoration: none;
+    color: #133beb;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.read-more:hover {
+    color: #4a5fe0;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    .posts-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+{% endblock %}
